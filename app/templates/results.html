@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <h1>Results</h1>
+  <p>Below are the predictions for your uploaded files.</p>
+  <p>
+    <strong>Total:</strong> {{ total }} ·
+    <strong>SPAM:</strong> {{ spam }} ·
+    <strong>Non-SPAM:</strong> {{ ham }}
+    {% if threshold %} · <strong>Decision threshold:</strong> {{ '%.2f'|format(threshold) }}{% endif %}
+    {% if dl_csv %} · <a class="link" download="results.csv" href="data:text/csv;base64,{{ dl_csv }}">Download CSV</a>{% endif %}
+  </p>
+</section>
+
+<div class="cards">
+  {% for r in results %}
+    <div class="card">
+      <div class="card-head">
+        <h3 title="{{ r.filename }}">{{ r.filename }}</h3>
+        {% if r.label %}<span class="pill {{ 'spam' if r.label == 'SPAM' else 'ham' }}">{{ r.label }}</span>
+        {% else %}<span class="pill warn">Error</span>{% endif %}
+      </div>
+      <div class="card-body">
+        {% if r.error %}
+          <p class="error">⚠ {{ r.error }}</p>
+        {% else %}
+          {% if r.proba %}
+            <p class="proba">Confidence — Ham: {{ '%.2f'|format(r.proba.ham*100) }}% · Spam: {{ '%.2f'|format(r.proba.spam*100) }}%</p>
+          {% endif %}
+          {% if r.why and r.why|length > 0 %}
+            <p class="proba">Why (top terms): 
+              {% for w in r.why %}
+                <span class="pill">{{ w[0] }}</span>
+              {% endfor %}
+            </p>
+          {% endif %}
+          <details>
+            <summary>Preview extracted text (first 800 chars)</summary>
+            <pre>{{ r.preview }}</pre>
+          </details>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<p><a class="link" href="{{ url_for('main.index') }}">&larr; Classify more files</a></p>
+{% endblock %}

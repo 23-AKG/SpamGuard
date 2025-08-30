@@ -1,0 +1,53 @@
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example   # keep your example env
+
+# OS / IDE cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Data
+data/
+!data/processed_data.csv   # keep small reference CSV if needed
+*.csv
+*.tsv
+
+# Models
+models/*.joblib
+models/*.pkl
+models/*.json
+!models/README.md   # you can keep an empty README so the folder stays
+
+# Reports
+reports/*.pdf
+reports/*.docx
+reports/*.html
+# keep Markdown templates
+!reports/*.md
+
+# Test PDFs (generated locally)
+test_pdfs/
+
+# Kaggle / Jupyter notebooks
+*.ipynb_checkpoints

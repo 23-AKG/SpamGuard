@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <h1>Detect SPAM in Email PDFs</h1>
+<p>Upload one or more <strong>PDF</strong> or <strong>.eml</strong> files. We’ll analyze the text and classify each as <strong>SPAM</strong> or <strong>Non-SPAM</strong>.</p>
+</section>
+
+<form class="upload" action="{{ url_for('main.predict') }}" method="POST" enctype="multipart/form-data">
+  <div id="dropzone" class="dropzone">
+  <input id="fileInput" type="file" name="pdfs" accept=".pdf,.eml,application/pdf,message/rfc822" multiple required />
+    <p>Drag & drop your PDFs here, or <span>browse</span></p>
+  </div>
+  <button type="submit">Classify PDFs</button>
+</form>
+
+<section class="notes">
+  <h2>Notes</h2>
+  <ul>
+    <li>If a PDF is a scan (image-only), text extraction may fail (no OCR in this build).</li>
+    <li>For best confidence display, train with Logistic Regression (probabilities).</li>
+  </ul>
+</section>
+{% endblock %}
