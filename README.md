@@ -99,9 +99,9 @@ Then upload files from `test_pdfs/` in the app.
 Includes a **Procfile** for easy deployment to Heroku/Render.  
 
 ## Screen Shots
--(images/1.png)
--(images/2.png)
--(images/3.png)
--(images/4.png)
--(images/5.png)
--(images/6.png)
+-![alt text](images/1.png)
+-![alt text](images/2.png)
+-![alt text](images/3.png)
+-![alt text](images/4.png)
+-![alt text](images/5.png)
+-![alt text](images/6.png)
